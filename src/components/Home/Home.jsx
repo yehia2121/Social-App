@@ -6,17 +6,12 @@ import { useQuery } from "@tanstack/react-query";
 import Coments from "./../Coments/Coments";
 import { Link } from "react-router-dom";
 import CreatePostModal from "../CreatePostModal/CreatePostModal";
+import { PostContext } from "../../Context/PostContext";
 
 export default function Home() {
-  let { token, settoken } = useContext(TokenContext);
+  let { getAllPosts } = useContext(PostContext);
 
-  function getAllPosts() {
-    return axios.get(`https://linked-posts.routemisr.com/posts?limit=50`, {
-      headers: {
-        token: token,
-      },
-    });
-  }
+  getAllPosts();
 
   let { data, isLoading, isError, error } = useQuery({
     queryKey: ["getPosts"],

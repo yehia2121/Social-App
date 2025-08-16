@@ -15,7 +15,7 @@ export default function DeleteComment({ commentId }) {
         },
       })
       .then((res) => {
-        QueryClient.invalidateQueries({ queryKey: ["singelPost"] });
+        QueryClient.invalidateQueries({ queryKey: ["userPosts"] });
         toast.success(res.data.message);
       })
       .catch((err) => {

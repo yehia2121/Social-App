@@ -26,6 +26,8 @@ export default function UserPosts({ id }) {
     retry: 1,
   });
 
+  
+
   ////////////////////////////////////////////////////////////////////////////////////
 
   if (isError) {
@@ -70,10 +72,6 @@ export default function UserPosts({ id }) {
             </Link>
             <div>
               {post.comments[0] && <Coments comment={post.comments[0]} />}
-              <div className="flex justify-end gap-2 mt-2">
-                <UpdateComment commentId={post?._id} />
-                <DeleteComment commentId={post?._id} />
-              </div>
             </div>
             <div className="mt-2 flex gap-2 border-1 p-2 rounded-2xl">
               {post?.id && <CreatePostModal postId={post?.id} />}

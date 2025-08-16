@@ -29,7 +29,7 @@ export default function UpdateComment({ commentId }) {
         },
       })
       .then((res) => {
-        QueryClient.invalidateQueries({ queryKey: ["singelPost"] });
+        QueryClient.invalidateQueries({ queryKey: ["userPosts"] });
         toast.success("Success");
       })
       .catch((err) => {

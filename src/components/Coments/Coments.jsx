@@ -28,7 +28,8 @@ export default function Coments({ comment }) {
           </div>
         </div>
         <div className="w-fit ms-auto flex gap-2.5">
-
+          <DeleteComment commentId={_id} />
+          <UpdateComment commentId={_id} />
         </div>
       </div>
     </>
