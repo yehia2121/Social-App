@@ -4,10 +4,12 @@ import { useForm } from "react-hook-form";
 import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import useUpdate from "../../Hooks/useUpdate";
 
 export default function UpdateComment({ commentId }) {
   const [isShow, setisShow] = useState(false);
   let QueryClient = useQueryClient();
+  let updateComments = useUpdate();
 
   function ChangeShow() {
     setisShow(!isShow);
@@ -22,19 +24,7 @@ export default function UpdateComment({ commentId }) {
   let { register, handleSubmit } = form;
 
   function handelUpdateComment(value) {
-    axios
-      .put(`https://linked-posts.routemisr.com/comments/${commentId}`, value, {
-        headers: {
-          token: localStorage.getItem("userToken"),
-        },
-      })
-      .then((res) => {
-        QueryClient.invalidateQueries({ queryKey: ["userPosts"] });
-        toast.success("Success");
-      })
-      .catch((err) => {
-        toast.error("comment can't be updated");
-      });
+    updateComments(commentId, "comments", value);
   }
 
   return (

@@ -3,31 +3,19 @@ import style from "./DeleteComment.module.css";
 import axios from "axios";
 import { useQueryClient } from "@tanstack/react-query";
 import toast from "react-hot-toast";
+import useDelete from "../../Hooks/useDelete";
 
 export default function DeleteComment({ commentId }) {
   let QueryClient = useQueryClient();
 
-  function handelDeleltComment() {
-    axios
-      .delete(`https://linked-posts.routemisr.com/comments/${commentId}`, {
-        headers: {
-          token: localStorage.getItem("userToken"),
-        },
-      })
-      .then((res) => {
-        QueryClient.invalidateQueries({ queryKey: ["userPosts"] });
-        toast.success(res.data.message);
-      })
-      .catch((err) => {
-        toast.error("comment can't be deleted");
-      });
-  }
+  let deleteComment = useDelete();
+
 
   return (
     <>
       <button
         onClick={() => {
-          handelDeleltComment();
+          deleteComment(commentId, "comments");
         }}
         data-modal-target="authentication-modal"
         data-modal-toggle="authentication-modal"
